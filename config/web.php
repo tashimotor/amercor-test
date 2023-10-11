@@ -1,7 +1,16 @@
 <?php
 
+use app\components\PolymorphRelation\PolymorphRelationMapFactory;
+use app\models\Call;
+use app\models\Customer;
+use app\models\Fax;
+use app\models\History;
+use app\models\Sms;
+use app\models\Task;
+use app\models\User;
+
 $params = require __DIR__ . '/params.php';
-$db = require __DIR__ . '/db.php';
+$db     = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
@@ -52,6 +61,19 @@ $config = [
             ],
         ],
         */
+        'polymorphRelation' => [
+            'class'        => PolymorphRelationMapFactory::class,
+            'polymorphMap' => [
+                History::class => [
+                    Customer::class,
+                    Sms::class,
+                    Task::class,
+                    Call::class,
+                    Fax::class,
+                    User::class,
+                ],
+            ]
+        ]
     ],
     'modules' => [
         'gridview' => [

@@ -8,7 +8,7 @@
  */
 
 use app\models\History;
-use app\widgets\Export\Export;
+use app\widgets\HistoryList\HistoryListExport;
 use app\widgets\HistoryList\helpers\HistoryListHelper;
 
 $filename = 'history';
@@ -18,7 +18,7 @@ ini_set('max_execution_time', 0);
 ini_set('memory_limit', '2048M');
 ?>
 
-<?= Export::widget([
+<?= HistoryListExport::widget([
     'dataProvider' => $dataProvider,
     'columns' => [
         [
@@ -47,7 +47,7 @@ ini_set('memory_limit', '2048M');
         [
             'label' => Yii::t('app', 'Message'),
             'value' => function (History $model) {
-                return strip_tags(HistoryListHelper::getBodyByModel($model));
+                return strip_tags(HistoryListExport::renderMessage($model));
             }
         ]
     ],

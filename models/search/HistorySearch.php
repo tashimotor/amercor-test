@@ -3,6 +3,7 @@
 namespace app\models\search;
 
 use app\models\History;
+use yii\base\InvalidConfigException;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
@@ -33,9 +34,10 @@ class HistorySearch extends History
     /**
      * Creates data provider instance with search query applied
      *
-     * @param array $params
+     * @param  array  $params
      *
      * @return ActiveDataProvider
+     * @throws InvalidConfigException
      */
     public function search($params)
     {
@@ -63,14 +65,7 @@ class HistorySearch extends History
         }
 
         $query->addSelect('history.*');
-        $query->with([
-            'customer',
-            'user',
-            'sms',
-            'task',
-            'call',
-            'fax',
-        ]);
+        $query->with(History::getPolymorphRelationTableNames());
 
         return $dataProvider;
     }
