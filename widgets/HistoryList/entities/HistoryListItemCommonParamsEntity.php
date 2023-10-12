@@ -8,7 +8,7 @@ use app\widgets\HistoryList\interfaces\HistoryListItemParams;
 readonly class HistoryListItemCommonParamsEntity implements HistoryListItemParams
 {
     public function __construct(
-        public ?string $body = null,
+        public string $body,
         public ?User $user = null,
         public ?string $content = null,
         public ?string $iconClass = null,

@@ -20,7 +20,7 @@ class HistoryListItemSMSRenderer implements HistoryListItemRenderer
         $sms = $history->sms;
 
         return new HistoryListItemCommonParamsEntity(
-            body: $sms?->message,
+            body: $this->getBody($history),
             user: $history->user,
             iconClass: 'icon-sms bg-dark-blue',
             footerDatetime: $history->ins_ts,
